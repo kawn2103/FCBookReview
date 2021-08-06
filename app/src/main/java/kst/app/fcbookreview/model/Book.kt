@@ -1,7 +1,10 @@
 package kst.app.fcbookreview.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Book(
     @SerializedName("itemId")
     val id: Long,
@@ -11,4 +14,4 @@ data class Book(
     val description: String,
     @SerializedName("coverSmallUrl")
     val coverSmallUrl: String
-)
+):Parcelable

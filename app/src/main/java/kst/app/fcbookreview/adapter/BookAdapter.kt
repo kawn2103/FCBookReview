@@ -10,13 +10,17 @@ import kst.app.fcbookreview.databinding.ItemBookBinding
 import kst.app.fcbookreview.model.Book
 import javax.net.ssl.SSLSessionBindingEvent
 
-class BookAdapter: ListAdapter<Book,BookAdapter.BookItemViewHolder>(diffUtil) {
+class BookAdapter(val itemClickedListener: (Book) -> Unit): ListAdapter<Book,BookAdapter.BookItemViewHolder>(diffUtil) {
 
     inner class  BookItemViewHolder(private val binding: ItemBookBinding):RecyclerView.ViewHolder(binding.root){
 
         fun bind(bookModel: Book){
             binding.titleTv.text = bookModel.title
             binding.descriptionTv.text = bookModel.description
+
+            binding.root.setOnClickListener {
+                itemClickedListener(bookModel)
+            }
             Glide
                 .with(binding.bookIv.context)
                 .load(bookModel.coverSmallUrl)
